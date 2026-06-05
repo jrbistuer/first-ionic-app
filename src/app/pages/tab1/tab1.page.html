@@ -6,12 +6,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <ion-button expand="block" (click)="takePhoto()">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    Take Photo
+  </ion-button>
 
+  @if (photoUri) {
+    <ion-img [src]="photoUri"></ion-img>
+  }
 </ion-content>
