@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Register</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <ion-item [class.ion-invalid]="name.invalid && name.touched"
+              [class.ion-valid]="name.valid">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name" (ionBlur)="name.markAsTouched()"></ion-input>
+    </ion-item>
+    @if (name.touched && name.hasError('required')) {
+      <ion-note color="danger" class="ion-padding-start">Name is required</ion-note>
+    }
+
+    <ion-item [class.ion-invalid]="surname.invalid && surname.touched"
+              [class.ion-valid]="surname.valid">
+      <ion-label position="floating">Surname</ion-label>
+      <ion-input type="text" formControlName="surname" (ionBlur)="surname.markAsTouched()"></ion-input>
+    </ion-item>
+    @if (surname.touched && surname.hasError('required')) {
+      <ion-note color="danger" class="ion-padding-start">Surname is required</ion-note>
+    }
+
+    <ion-item [class.ion-invalid]="email.invalid && email.touched"
+              [class.ion-valid]="email.valid">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email" (ionBlur)="email.markAsTouched()"></ion-input>
+    </ion-item>
+    @if (email.touched && email.hasError('required')) {
+      <ion-note color="danger" class="ion-padding-start">Email is required</ion-note>
+    } @else if (email.touched && email.hasError('email')) {
+      <ion-note color="danger" class="ion-padding-start">Enter a valid email address</ion-note>
+    }
+
+    <ion-item [class.ion-invalid]="password.invalid && password.touched"
+              [class.ion-valid]="password.valid">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" (ionBlur)="password.markAsTouched()"></ion-input>
+    </ion-item>
+    @if (password.touched && password.hasError('required')) {
+      <ion-note color="danger" class="ion-padding-start">Password is required</ion-note>
+    } @else if (password.touched && password.hasError('minlength')) {
+      <ion-note color="danger" class="ion-padding-start">Password must be at least 8 characters</ion-note>
+    }
+
+    <ion-item [class.ion-invalid]="confirmPassword.touched && (confirmPassword.hasError('required') || form.hasError('passwordMismatch'))"
+              [class.ion-valid]="confirmPassword.valid && !form.hasError('passwordMismatch')">
+      <ion-label position="floating">Confirm Password</ion-label>
+      <ion-input type="password" formControlName="confirmPassword" (ionBlur)="confirmPassword.markAsTouched()"></ion-input>
+    </ion-item>
+    @if (confirmPassword.touched && confirmPassword.hasError('required')) {
+      <ion-note color="danger" class="ion-padding-start">Please confirm your password</ion-note>
+    } @else if (confirmPassword.touched && form.hasError('passwordMismatch')) {
+      <ion-note color="danger" class="ion-padding-start">Passwords do not match</ion-note>
+    }
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">
+      Register
+    </ion-button>
+
+  </form>
+</ion-content>

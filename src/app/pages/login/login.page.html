@@ -4,10 +4,42 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">login</ion-title>
+      <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <ion-item [class.ion-invalid]="email.invalid && email.touched"
+              [class.ion-valid]="email.valid">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email" (ionBlur)="email.markAsTouched()"></ion-input>
+    </ion-item>
+    @if (email.touched && email.hasError('required')) {
+      <ion-note color="danger" class="ion-padding-start">Email is required</ion-note>
+    } @else if (email.touched && email.hasError('email')) {
+      <ion-note color="danger" class="ion-padding-start">Enter a valid email address</ion-note>
+    }
+
+    <ion-item [class.ion-invalid]="password.invalid && password.touched"
+              [class.ion-valid]="password.valid">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" (ionBlur)="password.markAsTouched()"></ion-input>
+    </ion-item>
+    @if (password.touched && password.hasError('required')) {
+      <ion-note color="danger" class="ion-padding-start">Password is required</ion-note>
+    }
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">
+      Login
+    </ion-button>
+
+    <p class="ion-text-center ion-margin-top">
+      Don't have an account? <a routerLink="/register">Register</a>
+    </p>
+
+  </form>
 </ion-content>
