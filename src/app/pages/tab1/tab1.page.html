@@ -3,6 +3,11 @@
     <ion-title>
       Tab 1
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +18,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button expand="block" (click)="takePhoto()">
+  <ion-button id="takePhotoButton" expand="block" (click)="takePhoto()">
     <ion-icon slot="start" name="camera"></ion-icon>
     Take Photo
   </ion-button>
